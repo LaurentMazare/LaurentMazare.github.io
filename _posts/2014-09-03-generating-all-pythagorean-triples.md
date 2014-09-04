@@ -58,3 +58,5 @@ let () =
 {% endhighlight %}
 
 Note that in the implementation of `fold_prim`, we generate all the necessary pairs (m, n) and filter the non coprime ones using Euclid's algorithm for [GCD](http://en.wikipedia.org/wiki/Greatest_common_divisor). This is quite inefficient and could be improved using a [Stern-Brocot tree](http://en.wikipedia.org/wiki/Stern-Brocot_tree) for example.
+
+*This post was originally published in July 2013.*
