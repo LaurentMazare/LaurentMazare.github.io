@@ -52,5 +52,3 @@ loop (loop acc left_m left_n m n) m n right_m right_n
 {% endhighlight %}
 
 The second line quickly leads to an out of memory crash: pairs of the form $$(1, n)$$ are coprime so this version generates all of them via the inner part of the loop that is not handled using tail-recursivity. However the first version does not suffer this issue and is able to work on a pretty large input.
-
-*This post was originally published in July 2013.*

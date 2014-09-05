@@ -58,5 +58,3 @@ let erathostene max_n =
 {% endhighlight %}
 
 In order to understand the code above, note that $$p_n$$ is true now denotes that integer $$2n+3$$ is prime.
-
-*This post was originally published in July 2013.*
