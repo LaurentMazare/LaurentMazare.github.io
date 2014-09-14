@@ -61,4 +61,55 @@ def c(n):
 
 ### Sublinear Algorithm
 
-The previous algorithm has a linear space complexity so it could be used up to roughly $$10^8$$ but after that the memory consumption starts being too large. Two simple observations make it possible to build an algorithm for $$c(n)$$ with a time complexity of $$O(n^\frac{3}{4})$$ and a space complexity of $$O(\sqrt{n})$$.
+The previous algorithm has a linear space complexity so it could be used up to roughly $$10^8$$ but after that the memory consumption starts being an issue. Two simple observations make it possible to build an algorithm for $$c(n)$$ with a time complexity of $$O(n^\frac{3}{4})$$ and a space complexity of $$O(\sqrt{n})$$.
+
+The first observation is that there are $$n^2$$ pairs $$(x, y)$$ with $$1 \leq x, y \leq n$$ (without any condition on their gcd) and these pairs can be partitioned according to their gcd values.
+
+$$n^2 = \sum_{k=1}^n \left| \left\{ (x, y) ~|~ \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\} \right|$$
+
+Moreover, the set of pairs $$(x, y)$$ with $$\gcd(x, y) = k$$ and $$1 \leq x, y \leq n$$ can be put in bijection with the set of pairs $$(u, v)$$ with $$\gcd(u, v) = 1$$ and $$1 \leq ku, kv \leq n$$. Thus we obtain:
+
+$$c\left(\left\lfloor \frac{n}{k} \right\rfloor\right) = \left| \left\{ (x, y) ~|~ \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\} \right|$$
+
+By combining these two results, we obtain the following recursive relation for $$c(n)$$:
+
+$$c(n) = n^2 - \sum_{k=2}^n c\left(\left\lfloor \frac{n}{k} \right\rfloor\right)$$
+
+Using this naively leads to an algorithm of linear complexity for both time and space. The second observation is that for $$k$$ ranging from $$1$$ to $$n$$, $$\lfloor n/k \rfloor$$ only takes roughly $$2\sqrt{n}$$ different values.
+
+For $$k$$ between $$1$$ and $$\sqrt{n}$$, values for $$\lfloor n/k\rfloor$$ are distinct and greater than $$\sqrt{n}$$. For a target value $$m$$ between $$1$$ and $$\sqrt{n}$$, we have:
+
+$$m \leq \frac{n}{k} < m+1$$
+
+$$ \frac{n}{m+1} < k \leq \frac{n}{m}$$
+
+So there are $$\lfloor n/m \rfloor - \lfloor n/(m+1) \rfloor$$ different values of $$k$$ for which $$\lfloor n/k\rfloor = m$$. Using this on the previous sum, we obtain:
+
+$$c(n) = n^2
+- \sum_{m=1}^{\lfloor \sqrt{n}\rfloor} c(m)\left(\left\lfloor \frac{n}{m} \right\rfloor - \left\lfloor \frac{n}{m+1} \right\rfloor\right)
+- \sum_{k=2}^\alpha c\left(\left\lfloor \frac{n}{k} \right\rfloor\right)
+$$
+
+Where $$\alpha$$ is the largest integer such that $$\lfloor n/\alpha \rfloor > \sqrt{n}$$.
+The code below implements this algorithm. For $$10^7$$ the returned value is 60792712854483 (which is identical to what was returned by the previous algorithm), for $$10^{10}$$ the returned value is 60792710185772432731 (unverified).
+
+
+{% highlight python %}
+from math import sqrt
+def c(N):
+  sqrt_N = int(sqrt(N))
+  indexes = range(1, 1+sqrt_N)
+  for k in xrange(sqrt_N, 0, -1):
+    if indexes[-1] != N // k: indexes.append(N // k)
+  res = {}
+  for n in indexes:
+    tmp = n ** 2
+    if 1 < n:
+      sqrt_n = int(sqrt(n))
+      for l in xrange(1, sqrt_n+1):
+        tmp -= res[l] * (n // l - n // (l+1))
+      for d in xrange(2, 1 + n // (1 + sqrt_n)):
+        tmp -= res[n // d]
+    res[n] = tmp
+  return res[N]
+{% endhighlight %}
