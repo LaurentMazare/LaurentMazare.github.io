@@ -6,7 +6,6 @@ category:
 tags: []
 ---
 {% include JB/setup %}
-
 A classical problem consists in counting the number of pairs of coprime integer below some limit $$n$$. Let $$c(n)$$ be this number of pairs:
 
 $$c(n) = \left| \left\{ (x, y) ~|~ \gcd(x, y) = 1,~ 1 \leq x, y \leq n \right\} \right|$$
