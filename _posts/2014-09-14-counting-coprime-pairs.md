@@ -65,11 +65,11 @@ The previous algorithm has a linear space complexity so it could be used up to r
 
 The first observation is that there are $$n^2$$ pairs $$(x, y)$$ with $$1 \leq x, y \leq n$$ (without any condition on their gcd) and these pairs can be partitioned according to their gcd values.
 
-$$n^2 = \sum_{k=1}^n card \left\{ (x, y) ~|~ \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\}$$
+$$n^2 = \sum_{k=1}^n card \left\{ (x, y); \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\}$$
 
 Moreover, the set of pairs $$(x, y)$$ with $$\gcd(x, y) = k$$ and $$1 \leq x, y \leq n$$ can be put in bijection with the set of pairs $$(u, v)$$ with $$\gcd(u, v) = 1$$ and $$1 \leq ku, kv \leq n$$. Thus we obtain:
 
-$$c\left(\left\lfloor \frac{n}{k} \right\rfloor\right) = card \left\{ (x, y) ~|~ \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\} $$
+$$c\left(\left\lfloor \frac{n}{k} \right\rfloor\right) = card \left\{ (x, y);~ \gcd(x, y) = k,~ 1 \leq x, y \leq n \right\} $$
 
 By combining these two results, we obtain the following recursive relation for $$c(n)$$:
 
