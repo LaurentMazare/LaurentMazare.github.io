@@ -142,11 +142,12 @@ let rec fft cs sign =
 
 *Inverse FFT: to be continued...*
 
-### Ocaml Implementation
+### Implementation
 
 The ocaml code is summed up in this [gist](https://gist.github.com/LaurentMazare/f44160c91a5460be539a).
 The implementation is very naive but should run in $$O(n\log(n))$$, there are lots of state of the art
-implementation available, e.g. in [GMP](https://gmplib.org/).
+implementation available, e.g. in [GMP](https://gmplib.org/). There is also a python implementation in
+this [second gist](https://gist.github.com/LaurentMazare/1034dbbe335c21ef0315).
 
 It still seems not very intuitive to me that the best way to multiply integers is by using floats and the
 cosine and sine functions (note that the algorithm can be adapted to use a finite field rather than complex
