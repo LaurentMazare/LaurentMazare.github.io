@@ -1,0 +1,23 @@
+{
+  "name": "candle-wasm",
+  "description": "Wasm example for the candle ML framework.",
+  "version": "0.1.0",
+  "license": "MIT/Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LaurentMazare/candle"
+  },
+  "files": [
+    "candle_wasm_bg.wasm",
+    "candle_wasm.js",
+    "candle_wasm.d.ts"
+  ],
+  "module": "candle_wasm.js",
+  "types": "candle_wasm.d.ts",
+  "sideEffects": false,
+  "keywords": [
+    "blas",
+    "tensor",
+    "machine-learning"
+  ]
+}
