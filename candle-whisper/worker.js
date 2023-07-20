@@ -269,12 +269,6 @@ function __wbg_get_imports() {
     imports.wbg.__wbg_postMessage_2f0b8369b84c3c1e = function() { return handleError(function (arg0, arg1) {
         getObject(arg0).postMessage(getObject(arg1));
     }, arguments) };
-    imports.wbg.__wbg_time_fa135a7c2786e907 = function(arg0, arg1) {
-        console.time(getStringFromWasm0(arg0, arg1));
-    };
-    imports.wbg.__wbg_timeEnd_594d82f147c9776f = function(arg0, arg1) {
-        console.timeEnd(getStringFromWasm0(arg0, arg1));
-    };
     imports.wbg.__wbg_data_ab99ae4a2e1e8bc9 = function(arg0) {
         const ret = getObject(arg0).data;
         return addHeapObject(ret);
@@ -340,7 +334,7 @@ function __wbg_get_imports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper64 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper62 = function(arg0, arg1, arg2) {
         const ret = makeClosure(arg0, arg1, 18, __wbg_adapter_14);
         return addHeapObject(ret);
     };
