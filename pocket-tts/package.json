@@ -1,0 +1,15 @@
+{
+  "name": "wasm-pocket-tts",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "wasm_pocket_tts_bg.wasm",
+    "wasm_pocket_tts.js",
+    "wasm_pocket_tts.d.ts"
+  ],
+  "main": "wasm_pocket_tts.js",
+  "types": "wasm_pocket_tts.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
