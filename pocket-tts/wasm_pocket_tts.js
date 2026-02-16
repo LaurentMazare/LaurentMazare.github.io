@@ -12,21 +12,17 @@ export class Model {
         wasm.__wbg_model_free(ptr, 0);
     }
     /**
-     * Generate audio from token IDs.
-     * Returns Float32Array of PCM audio samples at 24kHz.
-     * @param {Uint32Array} token_ids
-     * @param {number} frames_after_eos
-     * @param {number} temperature
-     * @returns {Float32Array}
+     * @param {Uint8Array} voice_weights
+     * @returns {number}
      */
-    generate(token_ids, frames_after_eos, temperature) {
-        const ptr0 = passArray32ToWasm0(token_ids, wasm.__wbindgen_malloc);
+    add_voice(voice_weights) {
+        const ptr0 = passArray8ToWasm0(voice_weights, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.model_generate(this.__wbg_ptr, ptr0, len0, frames_after_eos, temperature);
+        const ret = wasm.model_add_voice(this.__wbg_ptr, ptr0, len0);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
-        return takeFromExternrefTable0(ret[0]);
+        return ret[0] >>> 0;
     }
     /**
      * @returns {Float32Array | undefined}
@@ -40,14 +36,11 @@ export class Model {
     }
     /**
      * @param {Uint8Array} model_weights
-     * @param {Uint8Array} voice_weights
      */
-    constructor(model_weights, voice_weights) {
+    constructor(model_weights) {
         const ptr0 = passArray8ToWasm0(model_weights, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ptr1 = passArray8ToWasm0(voice_weights, wasm.__wbindgen_malloc);
-        const len1 = WASM_VECTOR_LEN;
-        const ret = wasm.model_new(ptr0, len0, ptr1, len1);
+        const ret = wasm.model_new(ptr0, len0);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
@@ -75,14 +68,15 @@ export class Model {
         return ret >>> 0;
     }
     /**
+     * @param {number} voice_index
      * @param {Uint32Array} token_ids
      * @param {number} frames_after_eos
      * @param {number} temperature
      */
-    start_generation(token_ids, frames_after_eos, temperature) {
+    start_generation(voice_index, token_ids, frames_after_eos, temperature) {
         const ptr0 = passArray32ToWasm0(token_ids, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.model_start_generation(this.__wbg_ptr, ptr0, len0, frames_after_eos, temperature);
+        const ret = wasm.model_start_generation(this.__wbg_ptr, voice_index, ptr0, len0, frames_after_eos, temperature);
         if (ret[1]) {
             throw takeFromExternrefTable0(ret[0]);
         }
