@@ -36,11 +36,14 @@ export class Model {
     }
     /**
      * @param {Uint8Array} model_weights
+     * @param {string} quant
      */
-    constructor(model_weights) {
+    constructor(model_weights, quant) {
         const ptr0 = passArray8ToWasm0(model_weights, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.model_new(ptr0, len0);
+        const ptr1 = passStringToWasm0(quant, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        const ret = wasm.model_new(ptr0, len0, ptr1, len1);
         if (ret[2]) {
             throw takeFromExternrefTable0(ret[1]);
         }
@@ -94,7 +97,7 @@ function __wbg_get_imports() {
         __wbg___wbindgen_throw_be289d5034ed271b: function(arg0, arg1) {
             throw new Error(getStringFromWasm0(arg0, arg1));
         },
-        __wbg_log_ed969a6a6303d67c: function(arg0, arg1) {
+        __wbg_log_a486f538dd735fef: function(arg0, arg1) {
             console.log(getStringFromWasm0(arg0, arg1));
         },
         __wbg_new_3eb36ae241fe6f44: function() {

@@ -6,7 +6,7 @@ export class Model {
     [Symbol.dispose](): void;
     add_voice(voice_weights: Uint8Array): number;
     generation_step(): Float32Array | undefined;
-    constructor(model_weights: Uint8Array);
+    constructor(model_weights: Uint8Array, quant: string);
     /**
      * Prepare text for generation: capitalize, add punctuation, pad short text.
      * Returns [processed_text, frames_after_eos] as a JS array.
@@ -23,7 +23,7 @@ export interface InitOutput {
     readonly __wbg_model_free: (a: number, b: number) => void;
     readonly model_add_voice: (a: number, b: number, c: number) => [number, number, number];
     readonly model_generation_step: (a: number) => [number, number, number];
-    readonly model_new: (a: number, b: number) => [number, number, number];
+    readonly model_new: (a: number, b: number, c: number, d: number) => [number, number, number];
     readonly model_prepare_text: (a: number, b: number, c: number) => any;
     readonly model_sample_rate: (a: number) => number;
     readonly model_start_generation: (a: number, b: number, c: number, d: number, e: number, f: number) => [number, number];

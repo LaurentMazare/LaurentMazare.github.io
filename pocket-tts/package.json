@@ -1,7 +1,13 @@
 {
-  "name": "wasm-pocket-tts",
+  "name": "ptts-wasm",
   "type": "module",
-  "version": "0.1.0",
+  "description": "Another minimalist deep-learning framework optimized for inference.",
+  "version": "0.1.9",
+  "license": "MIT/Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LaurentMazare/xn"
+  },
   "files": [
     "wasm_pocket_tts_bg.wasm",
     "wasm_pocket_tts.js",
@@ -11,5 +17,10 @@
   "types": "wasm_pocket_tts.d.ts",
   "sideEffects": [
     "./snippets/*"
+  ],
+  "keywords": [
+    "pytorch",
+    "deep-learning",
+    "machine-learning"
   ]
 }
